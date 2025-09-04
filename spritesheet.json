@@ -1,0 +1,21 @@
+{
+  "frames": {
+    "player-idle1":      { "x": 0,    "y": 0, "w": 1000, "h": 1000 },
+    "player-idle2":      { "x": 1000, "y": 0, "w": 1000, "h": 1000 },
+    "player-idle3":      { "x": 2000, "y": 0, "w": 1000, "h": 1000 },
+    "player-ArrowUp":    { "x": 3000, "y": 0, "w": 1000, "h": 1000 },
+    "player-ArrowDown":  { "x": 4000, "y": 0, "w": 1000, "h": 1000 },
+    "player-ArrowLeft":  { "x": 5000, "y": 0, "w": 1000, "h": 1000 },
+    "player-ArrowRight": { "x": 6000, "y": 0, "w": 1000, "h": 1000 },
+    "player-pose":       { "x": 7000, "y": 0, "w": 1000, "h": 1000 },
+
+    "teacher-idle1":      { "x": 0,    "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-idle2":      { "x": 1000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-idle3":      { "x": 2000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-ArrowUp":    { "x": 3000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-ArrowDown":  { "x": 4000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-ArrowLeft":  { "x": 5000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-ArrowRight": { "x": 6000, "y": 1000, "w": 1000, "h": 1000 },
+    "teacher-pose":       { "x": 7000, "y": 1000, "w": 1000, "h": 1000 }
+  }
+}

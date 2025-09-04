@@ -1,0 +1,15 @@
+{
+  "frames": {
+    "player-ArrowLeft":  { "x": 0,   "y": 0 },
+    "player-ArrowUp":    { "x": 80,  "y": 0 },
+    "player-ArrowRight": { "x": 160, "y": 0 },
+    "player-ArrowDown":  { "x": 240, "y": 0 },
+    "player-pose":       { "x": 320, "y": 0 },
+
+    "teacher-ArrowLeft":  { "x": 0,   "y": 80 },
+    "teacher-ArrowUp":    { "x": 80,  "y": 80 },
+    "teacher-ArrowRight": { "x": 160, "y": 80 },
+    "teacher-ArrowDown":  { "x": 240, "y": 80 },
+    "teacher-pose":       { "x": 320, "y": 80 }
+  }
+}

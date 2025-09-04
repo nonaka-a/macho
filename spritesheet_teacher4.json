@@ -1,0 +1,12 @@
+{
+  "frames": {
+    "teacher4-idle1":      { "x": 0,    "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-idle2":      { "x": 1000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-idle3":      { "x": 2000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-ArrowUp":    { "x": 3000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-ArrowDown":  { "x": 4000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-ArrowLeft":  { "x": 5000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-ArrowRight": { "x": 6000, "y": 0, "w": 1000, "h": 1000 },
+    "teacher4-pose":       { "x": 7000, "y": 0, "w": 1000, "h": 1000 }
+  }
+}
