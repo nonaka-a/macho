@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>マッチョでチェケラッチョ</title>
+    <link rel="icon" href="favicon.ico">
+     <!-- ★★★ OGP設定 ここから ★★★ -->
+    <meta property="og:title" content="マッチョでチェケラッチョ - DEMO">
+    <meta property="og:description" content="ノリノリのBGMに合わせてトレーニング！マッチョ×リズムゲーム！">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://nonaka-a.github.io/macho/index.html">
+    <meta property="og:image" content="https://nonaka-a.github.io/macho/images/ogp-image.png">
+    <meta property="og:site_name" content="マッチョでチェケラッチョ">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- ★★★ OGP設定 ここまで ★★★ -->
+    <link rel="stylesheet" href="./style.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic" crossorigin>
+<!-- ★ 以下の行を追加（太さ900のNoto Sans JPを読み込む） -->
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@900&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <div id="entry-screen" class="fullscreen-overlay">
+        <button id="entry-button" class="btn-common"></button>
+       <div id="loading-text" style="display: none;">Now Loading...</div>
+    </div>
+
+    <div id="game-container">
+          <div id="fade-overlay" class="fade-overlay"></div> <!-- ★この行を追加 -->
+    <button id="skip-button" class="icon-button" style="display: none;">SKIP</button>
+    <div id="top-right-ui-container">
+        <button id="pause-button" class="icon-button" style="display: none;">❚❚</button>
+        <button id="sound-toggle-button" class="icon-button">♪</button>
+    </div>
+        <!-- タイトル画面 -->
+        <div id="title-screen" style="display: none;">
+            <div id="title-logo"></div>
+            <div class="title-buttons">
+                <button id="stage-select-open-button" class="title-button btn-common">ステージセレクト</button>
+                <button id="title-start-button" class="title-button btn-common">ゲームスタート</button>
+                <button id="how-to-play-button" class="title-button btn-common">あそびかた</button>
+            </div>
+
+            <div id="stage-select-screen" style="display: none;">
+                <div class="how-to-play-content">
+                    <h2>STAGE SELECT</h2>
+                    <div class="stage-select-buttons">
+                        <button class="stage-select-button btn-common" data-stage-id="stage1">STAGE 1</button>
+                        <button class="stage-select-button btn-common" data-stage-id="stage2">STAGE 2</button>
+                        <button class="stage-select-button btn-common" data-stage-id="stage3">STAGE 3</button>
+                        <button class="stage-select-button btn-common" data-stage-id="stage4">STAGE 4</button>
+                        <button class="stage-select-button btn-common" data-stage-id="stage5">STAGE 5</button>
+                        <button class="stage-select-button btn-common" data-stage-id="ending">ENDING</button> <!-- ★この行を追加 -->
+                    </div>
+                    <button id="stage-select-close-button" class="btn-common">とじる</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- あそびかた画面 -->
+        <div id="how-to-play-screen" style="display: none;">
+            <div class="how-to-play-content">
+                <h2>HOW TO PLAY</h2>
+                <ul class="how-to-play-list">
+                    <li>
+                        <p>マッチョがリズムに合わせてトレーニングする<br><span>マッチョ×リズムゲーム！</span></p>
+                        <img src="images/howto/how-to-player-pose.png" id="how-to-img-intro" class="how-to-img">
+                    </li>
+                    <li>
+                        <p>流れてくるマークにあわせて<br>キーボードの<span>矢印キー</span>と<span>スペースキー</span>を押そう！</p>
+                        <img src="images/spritesheet_notes.png" id="how-to-img-notes" class="how-to-img">
+                    </li>
+                    <li>
+                        <p><span>【上はおてほんライン】</span>おてほんの動きを見てマネしよう！</p>
+                        <img src="images/howto/how-to-lanes_A.png" id="how-to-img-teacher" class="how-to-img">
+                    </li>
+                    <li>
+                        <p><span>【下がプレイヤーライン】</span>ワクに重なるタイミングで<br>キーを押すんだ！</p>
+                        <img src="images/howto/how-to-lanes_B.png" id="how-to-img-player" class="how-to-img">
+                    </li>
+                    <li>
+                        <p>リズムよくキーを押していくと<span>マッチョゲージ</span>がたまるぞ！<br>白い線をこえてステージクリア！</p>
+                        <img src="images/howto/how-to-gauge.png" id="how-to-img-gauge" class="how-to-img">
+                    </li>
+                </ul>
+                <button id="how-to-play-close-button" class="btn-common">とじる</button>
+            </div>
+        </div>
+
+         <!-- ストーリー画面 -->
+        <div id="story-screen" style="display: none;">
+            <div id="story-image-area">
+                <div id="story-bg-image" class="story-bg-image-element"></div>
+                <div id="story-bg-image-next" class="story-bg-image-element"></div>
+                <div id="story-character-image"></div>
+            </div>
+            <div id="story-text-area">
+                <p id="story-text"></p>
+                <div class="next-indicator">▼</div>
+            </div>
+        </div>
+
+        <!-- ステージタイトル画面 -->
+        <div id="stage-title-screen" style="display: none;">
+            <h2 id="stage-title-text"></h2>
+        </div>
+
+        <!-- ゲームプレイ画面 -->
+        <div id="game-play-screen" style="display: none;">
+            <div id="countdown-container"></div>
+            <div id="background-layer-b" class="background-layer"></div>
+            <div id="background-layer-a" class="background-layer"></div>
+            <div id="particle-container"></div>
+            <div id="player-char" class="character"></div>
+            <div id="teacher-char" class="character"></div>
+            <div id="player-face" class="face-icon"></div>
+            <div id="teacher-face" class="face-icon"></div>
+            <div id="groove-gauge-container">
+                <div id="groove-gauge-bg"></div>
+                <div id="groove-gauge-bar"></div>
+                <div id="groove-gauge-clear-line"></div>
+            </div>
+            <div id="ui-container">
+                <div class="ui-box">SCORE: <span id="score">0</span></div>
+                <div class="ui-box">COMBO: <span id="combo">0</span></div>
+            </div>
+            <canvas id="game-canvas"></canvas>
+            <div id="overlay">
+                <button id="start-button">ゲーム開始！</button>
+                <button id="pause-title-button" class="result-button btn-common" style="display: none;">タイトルへもどる</button>
+            </div>
+        </div>
+
+        <!-- 結果画面 -->
+        <div id="result-screen" class="result-screen" style="display: none;">
+            <div id="result-background-b" class="background-layer"></div>
+            <div id="result-background-a" class="background-layer"></div>
+            <div id="result-main-content">
+                <div id="result-char-image"></div>
+                <div class="result-info">
+                    <div class="result-texts">
+                        <p class="result-stage-name">STAGE1</p>
+                        <p class="result-music-name">Industrial Fact</p>
+                        <div id="groove-gauge-container-result" class="groove-gauge-container-result">
+                            <div id="groove-gauge-bg-result" class="groove-gauge-bg-result"></div>
+                            <div id="groove-gauge-bar-result" class="groove-gauge-bar-result"></div>
+                            <div id="groove-gauge-clear-line-result" class="groove-gauge-clear-line-result"></div>
+                        </div>
+                        <p class="result-stats">SCORE : <span id="result-score">0</span></p>
+                        <p class="result-stats">MAX COMBO : <span id="result-combo">0</span></p>
+                    </div>
+                </div>
+            </div>
+            <h2 id="result-title">STAGE CLEAR!</h2>
+            <div class="result-footer">
+                <div class="result-buttons">
+                    <button class="result-button btn-common" id="retry-button">リトライ</button>
+    <button class="result-button btn-common" id="next-stage-button" style="display: none;">次のステージへ</button>
+    <button class="result-button btn-common" id="title-button">タイトルへ</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- エンディング画面 -->
+        <div id="ending-screen" style="display: none;">
+            <div id="ending-dance-image"></div>
+            <div id="credits-container">
+                <div id="credits-roll"></div>
+            </div>
+            <div id="ending-logo" style="display: none;"></div>
+        </div>
+    </div>
+
+    <!-- データ定義スクリプト -->
+    <script src="./data/chart.js"></script>
+    <script src="./data/chart_2.js"></script> 
+    <script src="./data/chart_3.js"></script>
+    <script src="./data/chart_4.js"></script> 
+    <script src="./data/chart_5.js"></script> 
+    <script src="./data/stories.js"></script> 
+    <script src="./data/stages.js"></script> 
+
+    <!-- 機能別スクリプト (読み込み順が重要です) -->
+    <script src="./js/loader.js"></script>
+    <script src="./js/audio.js"></script>
+    <script src="./js/draw.js"></script>
+    <script src="./js/ui.js"></script>
+    <script src="./js/ending.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/main.js"></script>
+</body>
+</html>
