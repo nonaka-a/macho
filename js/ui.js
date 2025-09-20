@@ -119,17 +119,20 @@ async function showResultScreen(isClear, stageInfo) {
     const retryButton = document.getElementById('retry-button');
     const nextStageButton = document.getElementById('next-stage-button');
     
+    const isEnglish = document.documentElement.classList.contains('lang-en');
+
     if (isClear && S.currentStageId === 'stage5') {
-        retryButton.textContent = 'エンディング';
+        retryButton.textContent = isEnglish ? 'TO ENDING' : 'エンディング';
         retryButton.style.display = 'inline-block';
         nextStageButton.style.display = 'none';
     } else if (isClear && stageInfo.nextStage) {
         retryButton.style.display = 'none';
         nextStageButton.style.display = 'inline-block';
-        nextStageButton.textContent = `ステージ ${stageInfo.nextStage.replace('stage', '')} へ`;
+        const nextStageNumber = stageInfo.nextStage.replace('stage', '');
+        nextStageButton.textContent = isEnglish ? `TO STAGE ${nextStageNumber}` : `ステージ ${nextStageNumber} へ`;
         nextStageButton.dataset.nextStageId = stageInfo.nextStage;
     } else {
-        retryButton.textContent = 'リトライ';
+        retryButton.textContent = isEnglish ? 'RETRY' : 'リトライ';
         retryButton.style.display = 'inline-block';
         nextStageButton.style.display = 'none';
     }

@@ -154,9 +154,27 @@ D.creditsContainer = document.getElementById('credits-container');
 
 function initialize() {
     const D = GAME.Dom;
- loadUnlockedStages();
+    loadUnlockedStages();
 
-    D.entryButton.addEventListener('click', handleEntryClick);
+    const startJpButton = document.getElementById('start-jp-button');
+    if (startJpButton) {
+        // Language selection screen logic
+        const startEnButton = document.getElementById('start-en-button');
+        const langSelectContainer = document.querySelector('.lang-select-container');
+
+        startJpButton.addEventListener('click', () => {
+            langSelectContainer.style.display = 'none';
+            handleEntryClick(); 
+        });
+
+        startEnButton.addEventListener('click', () => {
+            window.location.href = 'index_en.html';
+        });
+    } else if (D.entryButton) {
+        // Direct entry logic (for index_en.html or original single-button setup)
+        D.entryButton.addEventListener('click', handleEntryClick);
+    }
+
     D.titleStartButton.addEventListener('click', startOpeningFlow);
     D.howToPlayButton.addEventListener('click', () => { D.howToPlayScreen.style.display = 'flex'; });
     D.howToPlayCloseButton.addEventListener('click', () => { D.howToPlayScreen.style.display = 'none'; });
@@ -187,7 +205,7 @@ function initialize() {
         D.stageSelectCloseButton.addEventListener('click', () => {
             D.stageSelectScreen.style.display = 'none';
             D.titleLogo.style.display = 'block';
-            D.titleButtons.style.display = 'flex';
+            D.titleButtons.style.display = 'grid';
         });
     }
     if (D.stageSelectButtonsContainer) {
@@ -196,7 +214,7 @@ function initialize() {
                 const stageId = e.target.dataset.stageId;
                 D.stageSelectScreen.style.display = 'none';
                 D.titleLogo.style.display = 'block';
-                D.titleButtons.style.display = 'flex';
+                D.titleButtons.style.display = 'grid';
 
                 if (stageId === 'stage1') {
                     startOpeningFlow();
@@ -213,7 +231,7 @@ function initialize() {
         const target = e.target;
         if (target.id === 'retry-button') {
             const stageId = GAME.State.currentStageId;
-            if (stageId === 'stage5' && target.textContent === 'エンディング') {
+            if (stageId === 'stage5' && (target.textContent === 'エンディング' || target.textContent === 'TO ENDING')) {
                 startEndingFlow();
             } else {
                 handleStageSelect(stageId);
@@ -332,8 +350,11 @@ async function handleEntryClick() {
     const S = GAME.State;
     const D = GAME.Dom;
 
-    D.entryButton.disabled = true;
-    D.entryButton.style.cursor = 'wait';
+    if (D.entryButton) {
+        D.entryButton.disabled = true;
+        D.entryButton.style.cursor = 'wait';
+    }
+    
     D.loadingText.style.display = 'block';
     await new Promise(resolve => requestAnimationFrame(resolve));
 
